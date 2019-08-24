@@ -34,4 +34,5 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () use (
     $router->post('/whereabouts', 'WhereaboutController@store');
     $router->put('/whereabouts/{id}', 'WhereaboutController@update');
     $router->delete('/whereabouts/{id}', 'WhereaboutController@destroy');
+    $router->post('/users', 'UserController@store');
 });
