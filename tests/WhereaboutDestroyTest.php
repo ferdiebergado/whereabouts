@@ -15,12 +15,12 @@ class WhereaboutDestroyTest extends TestCase
      */
     public function testDestroy()
     {
-        factory(App\Whereabout::class, 1)->create();
-        $todelete = Whereabout::latest()->first();
-        $id = $todelete->id;
+        $whereabout = factory(App\Whereabout::class)->create();
+        $id = $whereabout->id;
         $uri = "/v1/whereabouts/$id";
+        $user = factory('App\User')->create();
 
-        $this->delete($uri)->seeJson([
+        $this->actingAs($user)->delete($uri)->seeJson([
             'data' => "Resource $id deleted."
         ]);
 

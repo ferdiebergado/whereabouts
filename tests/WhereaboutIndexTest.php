@@ -42,7 +42,7 @@ class WhereaboutIndexTest extends TestCase
                 'total'
             ]
         ]);
-        $this->get($uri)->seeJson([
+        $this->seeJson([
             'id' => 1
         ]);
         $this->seeStatusCode(200);

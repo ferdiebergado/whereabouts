@@ -13,18 +13,22 @@ class WhereaboutShowTest extends TestCase
     public function testShow()
     {
         $uri = "/v1/whereabouts/2";
-        $this->get($uri)->seeJsonStructure([
-            'data' => [
-                'id',
-                'activity',
-                'venue',
-                'start_date',
-                'end_date',
-                'sponsor',
-                'created_at',
-                'updated_at'
-            ]
-        ]);
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user)
+            ->get($uri)->seeJsonStructure([
+                'data' => [
+                    'id',
+                    'activity',
+                    'venue',
+                    'start_date',
+                    'end_date',
+                    'sponsor',
+                    'created_at',
+                    'updated_at'
+                ]
+            ]);
+
         $this->get($uri)->seeJson([
             'id' => 2
         ]);

@@ -23,8 +23,9 @@ class WhereaboutStoreTest extends TestCase
             'end_date' => '2019-10-23',
             'user_id' => 3
         ];
+        $user = factory('App\User')->create();
 
-        $this->post($uri, $data)->seeJsonStructure([
+        $this->actingAs($user)->post($uri, $data)->seeJsonStructure([
             'data' => [
                 'id',
                 'activity',

@@ -12,10 +12,23 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json([
+        'message' => 'OK',
+        'data' => [
+            'api_version' => '1.1.0',
+            'framework_version' => $router->app->version(),
+        ]
+    ]);
 });
 
-$router->group(['prefix' => 'v1'], function () use ($router) {
+$router->group(['prefix' => 'auth'], function () use ($router) {
+    $router->post('login', 'AuthController@login');
+    $router->post('logout', 'AuthController@logout');
+    $router->post('refresh', 'AuthController@refresh');
+    $router->post('me', 'AuthController@me');
+});
+
+$router->group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () use ($router) {
     $router->get('/whereabouts', 'WhereaboutController@index');
     $router->get('/whereabouts/{id}', 'WhereaboutController@show');
     $router->post('/whereabouts', 'WhereaboutController@store');

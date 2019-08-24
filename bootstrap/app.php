@@ -84,6 +84,14 @@ if (env('APP_DEBUG')) {
     $app->register(Laravel\Tinker\TinkerServiceProvider::class);
 }
 
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+if (!class_exists('JWTAuth')) {
+    class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
+}
+
+$app->configure('auth');
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

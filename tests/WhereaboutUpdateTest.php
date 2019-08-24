@@ -26,7 +26,9 @@ class WhereaboutUpdateTest extends TestCase
 
         $param = $uri . http_build_query($data);
 
-        $this->put($param)->seeJsonStructure([
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user)->put($param)->seeJsonStructure([
             'data' => [
                 'id',
                 'activity',
