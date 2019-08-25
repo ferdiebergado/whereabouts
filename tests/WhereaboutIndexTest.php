@@ -13,7 +13,8 @@ class WhereaboutIndexTest extends TestCase
     public function testIndex()
     {
         $uri = "/v1/whereabouts?length=10";
-        $this->get($uri)->seeJsonStructure([
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->get($uri)->seeJsonStructure([
             'data' => [
                 [
                     'id',

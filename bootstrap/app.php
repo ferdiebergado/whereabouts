@@ -63,6 +63,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'guest' => App\Http\Middleware\Guest::class,
 ]);
 
 /*
@@ -78,7 +79,7 @@ $app->routeMiddleware([
 
 // $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 
 if (env('APP_DEBUG')) {
     $app->register(Laravel\Tinker\TinkerServiceProvider::class);

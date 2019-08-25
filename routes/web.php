@@ -26,13 +26,14 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
     $router->post('logout', 'AuthController@logout');
     $router->post('refresh', 'AuthController@refresh');
     $router->post('me', 'AuthController@me');
+    $router->post('register', 'RegisterController@register');
 });
 
 $router->group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () use ($router) {
-    $router->get('/whereabouts', 'WhereaboutController@index');
-    $router->get('/whereabouts/{id}', 'WhereaboutController@show');
-    $router->post('/whereabouts', 'WhereaboutController@store');
-    $router->put('/whereabouts/{id}', 'WhereaboutController@update');
-    $router->delete('/whereabouts/{id}', 'WhereaboutController@destroy');
-    $router->post('/users', 'UserController@store');
+    $router->get('whereabouts', 'WhereaboutController@index');
+    $router->get('whereabouts/{id}', 'WhereaboutController@show');
+    $router->post('whereabouts', 'WhereaboutController@store');
+    $router->put('whereabouts/{id}', 'WhereaboutController@update');
+    $router->delete('whereabouts/{id}', 'WhereaboutController@destroy');
+    $router->post('users', 'UserController@store');
 });
