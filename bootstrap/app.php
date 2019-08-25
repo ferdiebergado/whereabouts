@@ -25,6 +25,10 @@ $app->withFacades();
 
 $app->withEloquent();
 
+$app->configure('auth');
+
+$app->configure('cors');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -57,9 +61,10 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    //     App\Http\Middleware\ExampleMiddleware::class
+    \Spatie\Cors\Cors::class
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
@@ -91,7 +96,7 @@ if (!class_exists('JWTAuth')) {
     class_alias('Tymon\JWTAuth\Facades\JWTAuth', 'JWTAuth');
 }
 
-$app->configure('auth');
+$app->register(Spatie\Cors\CorsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
